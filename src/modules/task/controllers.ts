@@ -15,7 +15,16 @@ export class TaskController extends Controller {
             const payload = validate<CreateTaskPayloadDTO>(createTaskPayload, req.body);
             if (!payload.success) return payload;
 
-            return await taskService.createUser(req.user as ResponseUserToken, payload.data as CreateTaskPayloadDTO);
+            return await taskService.createTask(req.user as ResponseUserToken, payload.data as CreateTaskPayloadDTO);
+        });
+    }
+
+
+    // GET ALL TASKS
+    async getAllTasks(req: FastifyRequest, res: FastifyReply) {
+        return this.request(req, res, async () => {
+
+            return await taskService.getAllTasks(req.user as ResponseUserToken);
         });
     }
 }

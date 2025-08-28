@@ -12,7 +12,7 @@ class TaskService extends Service {
      * CREATE TASK
      * ===========================================================================================
      */
-    async createUser(user: ResponseUserToken, newTaskData: CreateTaskPayloadDTO) {
+    async createTask(user: ResponseUserToken, newTaskData: CreateTaskPayloadDTO) {
         return this.execute(async () => {
 
             // ===========================================================================================
@@ -40,6 +40,25 @@ class TaskService extends Service {
                 message: 'Task registered succesfully!',
                 statusCode: 201,
                 data: { newTask }
+            });
+        });
+    }
+
+
+    /**
+     * ===========================================================================================
+     * GET ALL TASKS
+     * ===========================================================================================
+     */
+    async getAllTasks(user: ResponseUserToken) {
+        return this.execute(async () => {
+
+            // ===========================================================================================
+            const tasks = await prisma.tasks.findMany({ where: { userId: user.id } });
+
+            return response.success({
+                message: 'Consultation carried out successfully!',
+                data: tasks
             });
         });
     }
