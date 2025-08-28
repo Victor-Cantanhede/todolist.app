@@ -4,11 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "dev": "tsx watch --env-file=.env.development src/server.ts",
-  "build": "tsc -p tsconfig.json",
-  "start": "node --env-file=.env.production dist/server.js",
-  "prisma": "prisma"
-},
+    "dev": "tsx watch --env-file=.env.development src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node --env-file=.env dist/server.js",
+    "prisma": "prisma"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Victor-Cantanhede/todolist.app.git"
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.3.0",
     "prisma": "^6.15.0",
     "tsx": "^4.20.5",
