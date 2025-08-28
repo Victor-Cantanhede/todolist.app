@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { Controller } from '../utils/Controller';
-import { validate } from './dto/schemas';
+import { validate } from '../utils/validateZodSchema';
 import { userService } from './services';
 import {
     authUserPayload,

@@ -2,7 +2,9 @@ import { FRONT_URL, JWT_SECRET, NODE_ENV, PORT } from './config/env';
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import fastifyCookie from '@fastify/cookie';
+
 import { userRoutes } from './modules/user/routes';
+import { taskRoutes } from './modules/task/routes';
 
 
 async function bootstrap() {
@@ -20,8 +22,9 @@ async function bootstrap() {
         res.status(200).send({ message: 'Server connected!' });
     });
 
-    // USER ROUTES
+    // ROUTES
     app.register(userRoutes, { prefix: '/users' });
+    app.register(taskRoutes, { prefix: '/tasks' });
 
     app.listen({ port: PORT }, (err, address) => {
         if (err) {
