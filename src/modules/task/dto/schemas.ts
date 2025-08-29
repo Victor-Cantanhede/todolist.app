@@ -21,3 +21,18 @@ export const createTaskPayload = z.object({
         .max(500),
 });
 export type CreateTaskPayloadDTO = z.infer<typeof createTaskPayload>;
+
+
+/**
+ * ===========================================================================================
+ * UPDATE TASK PAYLOAD
+ * ===========================================================================================
+ */
+export const updateTaskPayload = createTaskPayload.pick({
+    title: true,
+    description: true
+})
+.extend({
+    status: z.boolean()
+});
+export type UpdateTaskPayloadDTO = z.infer<typeof updateTaskPayload>;

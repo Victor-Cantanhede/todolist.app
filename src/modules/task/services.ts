@@ -2,7 +2,7 @@ import { prisma } from '../../lib/prisma/db';
 import { Service } from '@modules/utils/Service';
 import { response } from '@modules/utils/Controller';
 import { ResponseUserToken } from '@modules/utils/types';
-import { CreateTaskPayloadDTO } from './dto/schemas';
+import { CreateTaskPayloadDTO, UpdateTaskPayloadDTO } from './dto/schemas';
 
 
 class TaskService extends Service {
@@ -59,6 +59,60 @@ class TaskService extends Service {
             return response.success({
                 message: 'Consultation carried out successfully!',
                 data: tasks
+            });
+        });
+    }
+
+
+    /**
+     * ===========================================================================================
+     * UPDATE TASK
+     * ===========================================================================================
+     */
+    async updateTask({ user, taskId, newTaskData }: {
+        user: ResponseUserToken,
+        taskId: number,
+        newTaskData: UpdateTaskPayloadDTO
+
+    }) {
+        return this.execute(async () => {
+
+            // ===========================================================================================
+            const task = await prisma.tasks.findUnique({
+                where: {
+                    id: taskId,
+                    userId: user.id
+                }
+            });
+
+            if (!task) {
+                return response.error({ message: 'Task not found!' });
+            }
+
+            // ===========================================================================================
+            const existingTask = await prisma.tasks.findUnique({
+                where: {
+                    userId_title: {
+                        userId: user.id,
+                        title: newTaskData.title
+                    }
+                }
+            });
+
+            if (existingTask && existingTask.id !== task.id) {
+                return response.error({ message: 'A task with the same name already exists!' });
+            }
+
+            // ===========================================================================================
+            const updatedTask = await prisma.tasks.update({
+                where: { id: task.id },
+                data: { ...newTaskData }
+            });
+
+            // ===========================================================================================
+            return response.success({
+                message: 'Task updated successfully!',
+                data: { updatedTask }
             });
         });
     }
