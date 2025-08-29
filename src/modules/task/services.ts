@@ -116,6 +116,38 @@ class TaskService extends Service {
             });
         });
     }
+
+
+    /**
+     * ===========================================================================================
+     * DELETE TASK
+     * ===========================================================================================
+     */
+    async deleteTask(user: ResponseUserToken, taskId: number) {
+        return this.execute(async () => {
+
+            // ===========================================================================================
+            const task = await prisma.tasks.findUnique({
+                where: {
+                    id: taskId,
+                    userId: user.id
+                }
+            });
+
+            if (!task) {
+                return response.error({ message: 'Task not found!' });
+            }
+
+            // ===========================================================================================
+            const deletedTask = await prisma.tasks.delete({ where: { id: task.id } });
+
+            // ===========================================================================================
+            return response.success({
+                message: 'Task deleted successfully!',
+                data: { deletedTask }
+            });
+        });
+    }
 }
 
 export const taskService = new TaskService();

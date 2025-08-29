@@ -47,10 +47,12 @@ export class TaskController extends Controller {
     }
 
     // DELETE TASK
-    // async deleteTask(req: FastifyRequest, res: FastifyReply) {
-    //     return this.request(req, res, async () => {
+    async deleteTask(req: FastifyRequest<{ Params: { id: string } }>, res: FastifyReply) {
+        return this.request(req, res, async () => {
 
-    //         //
-    //     });
-    // }
+            const taskId = Number(req.params.id);
+
+            return await taskService.deleteTask(req.user as ResponseUserToken, taskId);
+        });
+    }
 }
