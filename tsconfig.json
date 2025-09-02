@@ -8,8 +8,8 @@
       "@modules/*": ["modules/*"]
     },
 
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "target": "esnext",
     "lib": ["esnext"],
     "types": ["node"],
@@ -26,6 +26,7 @@
     "skipLibCheck": true,
 
     "verbatimModuleSyntax": false,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "esModuleInterop": true
   }
 }
