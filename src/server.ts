@@ -11,7 +11,11 @@ async function bootstrap() {
     const app = Fastify();
 
     // CONFIG CORS
-    await app.register(fastifyCors, { origin: FRONT_URL, credentials: true });
+    await app.register(fastifyCors, {
+        origin: FRONT_URL,
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+    });
 
     // CONFIG JWT
     app.register(fastifyCookie, { secret: JWT_SECRET });
