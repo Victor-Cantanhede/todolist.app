@@ -34,7 +34,9 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.3.0",
+    "esbuild": "^0.25.9",
     "prisma": "^6.15.0",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
