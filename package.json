@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env.development src/server.ts",
-    "build": "tsc -p tsconfig.json && cp -r src/config dist/config",
+    "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "prisma": "prisma migrate deploy && prisma generate"
   },
