@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import { prisma } from '../../lib/prisma/db';
 import { Service } from '@modules/utils/Service';
 import { response } from '@modules/utils/Controller';
-import { JWT_SECRET } from 'config/env';
 
 import { AuthUserPayloadDTO, CreateUserPayloadDTO } from './dto/schemas';
 
@@ -68,7 +67,7 @@ class UserService extends Service {
 
             // ===========================================================================================
             const { password, ...safeUserData } = user;
-            const token = jwt.sign(safeUserData, JWT_SECRET, { expiresIn: '1d' });
+            const token = jwt.sign(safeUserData, process.env.JWT_SECRET as string, { expiresIn: '1d' });
 
             // ===========================================================================================
             return response.success({
