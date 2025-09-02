@@ -30,7 +30,7 @@ async function bootstrap() {
     app.register(userRoutes, { prefix: '/users' });
     app.register(taskRoutes, { prefix: '/tasks' });
 
-    app.listen({ port: PORT }, (err, address) => {
+    app.listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
         if (err) {
             console.error(err);
             process.exit(1);
