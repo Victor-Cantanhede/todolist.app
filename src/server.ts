@@ -1,4 +1,3 @@
-import { FRONT_URL, JWT_SECRET, NODE_ENV, PORT } from './config/env';
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import fastifyCookie from '@fastify/cookie';
@@ -8,6 +7,12 @@ import { taskRoutes } from './modules/task/routes';
 
 
 async function bootstrap() {
+    
+    const NODE_ENV = process.env.NODE_ENV as string;
+    const PORT = Number(process.env.PORT) || 5000;
+    const FRONT_URL = process.env.FRONT_URL as string;
+    const JWT_SECRET = process.env.JWT_SECRET as string;
+
     const app = Fastify();
 
     // CONFIG CORS
