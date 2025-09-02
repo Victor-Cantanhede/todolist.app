@@ -10,7 +10,7 @@ async function bootstrap() {
     
     const NODE_ENV = process.env.NODE_ENV as string;
     const PORT = Number(process.env.PORT) || 5000;
-    const FRONT_URL = process.env.FRONT_URL as string;
+    const FRONT_URL = 'https://todolistappfrontendangular.vercel.app';
     const JWT_SECRET = process.env.JWT_SECRET as string;
 
     const app = Fastify();
